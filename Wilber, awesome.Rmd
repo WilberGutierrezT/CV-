@@ -1,0 +1,148 @@
+---
+name: Wilber
+surname: Gutiérrez Taboada
+position: "Estudiante de Carrera de Economía"
+profilepic: "wilber.png"
+address: "Escuela Profesional de Economía, Universidad Nacional de San Cristóbal de Huamanga"
+phone: 959 636 195
+# www: mariecurie.com
+email: "wilber.gutierrez.01.97@gmail.com"
+twitter: WilberGut_T
+github: WilberGutierrezT
+# linkedin: mariecurie
+aboutme: "Actualmente, estoy cursando el Tercer año de estudios de carrera profesional de Economía"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+headcolor: 780000
+output: 
+  vitae::awesomecv:
+    page_total: true
+    
+fontfamily: mathpazo
+fontfamilyoptions: sc, osf
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+```
+
+# Perfil Profesional
+
+**Falta hacer.**
+
+# Experiencia Laboral
+
+```{r}
+tribble(
+  ~ Puesto, ~ Year, ~ Empresa, ~ Where,
+  "Maquinista Offset", "2013-2015", "Servicios en Mypes", "Centro Lima, Lima-Perú",
+  "Atención al Cliente", "2015-2020", "Empresa Wong S.A.", "La Molina, Lima-Perú"
+) %>% 
+  detailed_entries(Puesto, Year, Empresa, Where)
+
+```
+
+
+# Formación Académica
+
+```{r}
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Secundaria Completa", "2009-2014", "I.E. General Córdova", "Ayacucho, Perú",
+  "Carrera de Economía", "2020 - Actual", "Universidad Nacional de San Cristóbal de Huamanga", "Ayacucho, Perú"
+
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+# Cursos y/o Capacitaciones Complementarios
+
+```{r}
+tribble(
+  ~Year, ~Type, ~where, ~Desc,
+  2020, "Oratoria y Liderazgo", "Soy Líder de la Municipalidad de Lima", "Con duración de 12 horas académicas.",
+  2021, "Econometría", "INFOX, PUCP" , "Taller Econometría con Stata con duración de 2 horas académicas.",
+  2021, "Gestión Pública", "Edúcate Perú Consultores" , "Gestión de Inversión Pública regional y Local en el Marco del Invierte.pe con duración de 18 horas académicas.",
+  2022, "Curso Tableau", "Edúcate Perú Consultores", "Con duración de 15 horas académicas."
+  
+) %>% 
+ brief_entries(
+   what = glue::glue("Certificado en {Type}", " en {where}"), 
+   when = Year, 
+   with = Desc
+   )
+
+```
+
+# Habilidades
+
+Las habilidades son desarrollados de manera autodidacta. Las habilidad de software e idiomas son de mi mayor interés y prioridad, los cuales continuo afianzando continuamente (vea la gráfica siguiente).
+
+```{r, out.width="95%"}
+data <- tribble(
+  ~habilidad, ~score,
+  "Team Work", 10,
+  "Español",   10,
+  "Quechua",   8,
+  "Inglés",    6,
+  "Office",    6,
+  "R studio",  5,
+  "Tableau",   5,
+  "Latex",     4
+) 
+data1 <- as.data.frame(data)
+
+data1 %>% mutate(habilidad = fct_reorder(habilidad, score)) %>%
+  ggplot( aes(x=habilidad, y=score)) +
+    geom_bar(stat="identity", fill="#64171c", alpha=.6, width=.6) +
+    geom_text(aes(label= score), vjust= 0.5,  hjust = -0.3, colour = "#64171c", size = 3) +
+    coord_flip() +
+    xlab("") +
+    labs(
+      caption = "Nota. Las habilidades están ponderadores de 1 a 10 puntos, siendo el último de máximo score.",
+      ylab = "", xlab = "") +
+    theme(
+      plot.title = element_text(colour = "#64171c", size = 16),
+      plot.caption = element_text(colour = "#64171c", size = 8),
+      axis.ticks = element_blank(),
+      panel.grid = element_blank(),
+      panel.background = element_blank(),
+      axis.title = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_text(colour = "#64171c", size = 11)
+    )
+
+```
+
+
+
+# Pasatiempos e Intereses
+
+</br>
+
+```{r, include=FALSE}
+knitr::write_bib(c("vitae", "tibble"), "packages.bib")
+
+bibliography_entries("packages.bib") %>%
+  arrange(desc(author$family), issued)
+```
+
+![](lectura.png){#id1 .class width=6.5% height=3%} **Lectura.**
+
+![](work.png){#id2 .class width=6.5% height=3%} **Reunión amical.**
+
+![](programacion.png){#id3 .class width=6.5% height=3%} **Softwares.**
+
+![](caridad.png){#id4 .class width=6.5% height=3%} **Voluntariado.**
+
+
+
+
